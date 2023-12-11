@@ -41,7 +41,7 @@ License along with TRF.  If not, see <https://www.gnu.org/licenses/>.
 
 #ifndef TRFRUN_H
 #define TRFRUN_H
-
+#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>

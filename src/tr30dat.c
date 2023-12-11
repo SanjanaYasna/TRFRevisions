@@ -21,7 +21,7 @@ License along with TRF.  If not, see <https://www.gnu.org/licenses/>.
 
 #ifndef TR30DAT_C
 #define TR30DAT_C
-
+#include <limits.h>
 #include <stdlib.h> /* has calloc definition */
 #include <math.h>
 #include "tr30dat.h"

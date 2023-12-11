@@ -21,10 +21,10 @@ License along with TRF.  If not, see <https://www.gnu.org/licenses/>.
 /* Feb. 14th, 1997 */
 /* This is a version which contains the narrow band alignment routines
    narrowbnd.c, prscores.c, pairalign.c */
-
+#include <sys/syslimits.h>
 #ifndef TR30DAT_H
 #define TR30DAT_H
-
+#include <limits.h>
 /* These declarations moved by Yevgeniy Gelfand on Jan 27, 2010  */
 /* To have smaller sequences not send results */
 /* to disc to improve performance             */
@@ -362,10 +362,10 @@ typedef struct {
     int          use_stdin;
     unsigned int maxwraplength;
 
-    char  inputfilename[_MAX_PATH]; /* constant defined in stdlib */
-    char  outputprefix[_MAX_PATH];
-    char  outputdirectory[_MAX_PATH];
-    char  outputfilename[_MAX_PATH];
+    char  inputfilename[PATH_MAX]; /* constant defined in stdlib */
+    char  outputprefix[PATH_MAX];
+    char  outputdirectory[PATH_MAX];
+    char  outputfilename[PATH_MAX];
     int   multisequencefile; /* flags if file has more than one sequence */
     int   sequenceordinal;   /* holds seq. index starting on 1 */
     int   outputcount;       /* repeats found */
