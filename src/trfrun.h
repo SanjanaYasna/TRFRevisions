@@ -34,7 +34,7 @@ License along with TRF.  If not, see <https://www.gnu.org/licenses/>.
  *                                           December 10, 2001
  *
 
-
+This is the issue. Can this be done in parallel?
  Last updated Dec 14,2004
  ***************************************************************/
 
@@ -45,6 +45,7 @@ License along with TRF.  If not, see <https://www.gnu.org/licenses/>.
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <pthread.h>
 
 /* Added by Yozen to explicitly include header for windows GUI definitons on Jan 25, 2016 */
 #ifdef WINDOWSGUI
@@ -325,6 +326,8 @@ void TRFControlRoutine(void)
 		// return CTRL_SUCCESS;
 		return;
 	}
+
+	
 	paramset.multisequencefile = 1;
 	paramset.sequenceordinal = 1;
 
@@ -407,9 +410,19 @@ void TRFControlRoutine(void)
 	}
 
 	/******************************************
-	 *   process every sequence in file
+	 *   process every sequence in file ***parallelize?
 	 *******************************************/
+
+//start point of forking
+	if (paramset.ngs != 1) {
+						fprintf(destdfp,"Tandem Repeats Finder Program written by:\n\n");
+						fprintf(destdfp,"Gary Benson\n");
+						fprintf(destdfp,"Program in Bioinformatics\n");
+						fprintf(destdfp,"Boston University\n");
+						fprintf(destdfp,"Version %s\n", versionstring);
+					}
 	i=1;
+	//processes each sequence, and tries to avoid reporting to disk if too small. How about we don't report to disk at all?
 	for(;;)
 	{
 
@@ -435,17 +448,6 @@ void TRFControlRoutine(void)
 
 				IL* lpointer;
 				int charcount;
-
-				/* only for the first one write the header */
-				if (i==1) {
-					if (paramset.ngs != 1) {
-						fprintf(destdfp,"Tandem Repeats Finder Program written by:\n\n");
-						fprintf(destdfp,"Gary Benson\n");
-						fprintf(destdfp,"Program in Bioinformatics\n");
-						fprintf(destdfp,"Boston University\n");
-						fprintf(destdfp,"Version %s\n", versionstring);
-					}
-				}
 
 				//fprintf(destdfp,"\n\n%s%s",hsequence, hparameters);
 
@@ -560,7 +562,6 @@ void TRFControlRoutine(void)
 			/* remove intermediary file */
 			remove(outm);
 		}
-
 
 
 		FreeList(GlobalIndexList);
