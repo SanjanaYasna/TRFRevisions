@@ -314,6 +314,8 @@ char* GetNamePartAddress(char* name)
 	char dirsymbol = '/';
 #elif defined(WINDOWSCONSOLE)||defined(WINDOWSGUI)
 	char dirsymbol = '\\';
+#else
+	char dirsymbol = '/';
 #endif
 
 

@@ -4128,7 +4128,7 @@ void newtupbo(void)
 
 							/* test criteria for candidate */
 
-
+							//MAIN ALGORITHM: IF MEET 3 CRITERIA, DO THE ALIGNMENT SINCE IT IS A CANDIDATE AND SEE IF IT'S SATISFACTORY
 							if((new_meet_criteria_3(d,i,Tuplesize[g]))
 									/* change 2: changed 250 into 100 */
 									&&((d<=250)||(search_for_range_in_bestperiodlist(i,d)))) 

@@ -39,7 +39,7 @@ int counterInSeq = 0;
 
 /* make sure only one platform is defined */
 #if ( defined( WINDOWSGUI ) + defined( WINDOWSCONSOLE ) + defined( UNIXGUI ) + \
-      defined( UNIXCONSOLE ) ) > 1
+      defined( UNIXCONSOLE ) + defined(__APPLE__)) > 1
 #error Only one Platform can be defined in tr30dat.h
 #endif
 
@@ -69,9 +69,11 @@ int counterInSeq = 0;
 #define _MAX_FNAME 260 /* max. length of file name component */
 #define _MAX_EXT 260   /* max. length of extension component */
 #endif
-
 #endif
-
+#if __APPLE__
+#define _MAX_PATH 260  /* max. length of full pathname */
+#define _MAX_DIR 260   /* max. length of path component */
+#endif
 /* all include  libraries */
 #include <stdio.h>
 #include <stddef.h> /* has size_t definition */
